@@ -47,7 +47,7 @@ jobs:
           GCP_CREDENTIALS_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
           PROXY_URL: ${{ secrets.PROXY_URL }}
         run: |
-          python get_message.py
+          python get_message-new.py
 
       # 6. (Tùy chọn) Lưu ảnh màn hình (screenshot) nếu xảy ra lỗi để kiểm tra/debug
       - name: Upload error screenshots on failure
