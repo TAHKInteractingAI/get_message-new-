@@ -41,6 +41,12 @@ password = "passnotE@1234"
 # GOOGLE SHEETS
 # =========================
 def get_gsclient():
+    # Đọc JSON từ biến môi trường của GitHub Actions Secrets
+    gcp_credentials_json = os.getenv("GCP_CREDENTIALS_JSON")
+    
+    if not gcp_credentials_json:
+        raise ValueError("❌ Không tìm thấy biến môi trường GCP_CREDENTIALS_JSON!")
+
     creds_dict = json.loads(gcp_credentials_json)
 
     scopes = [
@@ -78,6 +84,7 @@ def get_driver():
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920,1080")
+    options.add_argument("--headless=new")
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-setuid-sandbox")
     options.add_argument("--disable-infobars")
@@ -96,7 +103,7 @@ def get_driver():
     if proxy_url:
         options.add_argument(f"--proxy-server={proxy_url}")
 
-    driver = uc.Chrome(options=options, headless=True, version_main=150)
+    driver = uc.Chrome(options=options)
 
     driver.execute_cdp_cmd(
         "Page.addScriptToEvaluateOnNewDocument",
