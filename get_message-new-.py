@@ -41,6 +41,14 @@ password = "passnotE@1234"
 # GOOGLE SHEETS
 # =========================
 def get_gsclient():
+    # 1. Khai báo biến gcp_credentials_json bằng cách đọc từ biến môi trường
+    gcp_credentials_json = os.getenv("GCP_CREDENTIALS_JSON") or os.getenv("GCP_SA_KEY")
+    
+    # 2. Kiểm tra nếu không có biến môi trường thì báo lỗi rõ ràng
+    if not gcp_credentials_json:
+        raise ValueError("❌ Không tìm thấy biến môi trường GCP_CREDENTIALS_JSON hoặc GCP_SA_KEY!")
+
+    # 3. Chuyển chuỗi JSON thành Dict
     creds_dict = json.loads(gcp_credentials_json)
 
     scopes = [
