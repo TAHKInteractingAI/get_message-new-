@@ -31,7 +31,6 @@ jobs:
       - name: Run the main script
         env:
           GCP_CREDENTIALS_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
-          GCP_SA_KEY: ${{ secrets.GCP_CREDENTIALS_JSON }}
           TEAMS_EMAIL: ${{ secrets.TEAMS_EMAIL }}
           TEAMS_PASSWORD: ${{ secrets.TEAMS_PASSWORD }}
         run: python get_message-new-.py
